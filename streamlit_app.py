@@ -1,16 +1,12 @@
-import random
+ import random
 
 import streamlit as st
-
-# Trivia dataset
 
 trivia_data = [
 
     {
 
         "question": "What is the capital of France?",
-
-        "options": ["Paris", "London", "Berlin", "Madrid"],
 
         "answer": "Paris"
 
@@ -20,13 +16,9 @@ trivia_data = [
 
         "question": "Who painted the Mona Lisa?",
 
-        "options": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo"],
-
         "answer": "Leonardo da Vinci"
 
     },
-
-    # Add more trivia questions here
 
 ]
 
@@ -40,41 +32,58 @@ def display_question(question):
 
     st.write(question["question"])
 
-    st.subheader("Options:")
+def check_answer(question, selected_answer):
 
-    for option in question["options"]:
-
-        st.write(option)
-
-def check_answer(question, selected_option):
-
-    return selected_option == question["answer"]
+    return selected_answer.lower() == question["answer"].lower()
 
 # Streamlit app
 
-st.title("Trivia App")
-
-# Get a random question
+st.title("🦉Trivia App ")
 
 question = get_random_question()
 
-# Display the question and options
-
 display_question(question)
 
-# User's answer
+selected_answer = st.text_input("Your Answer")
 
-selected_option = st.radio("Select your answer:", question["options"])
+timer = st.empty()
 
-# Check the answer
+correct_answers = 0
+
+total_questions = 0
 
 if st.button("Check Answer"):
 
-    if check_answer(question, selected_option):
+    total_questions += 1
+
+    if check_answer(question, selected_answer):
 
         st.write("Correct!")
+
+        correct_answers += 1
 
     else:
 
         st.write("Incorrect. The correct answer is:", question["answer"])
 
+st.subheader("Score")
+
+st.write(f"Correct Answers: {correct_answers}/{total_questions}")
+
+seconds = 30
+
+while seconds >= 0:
+
+    timer.write(f"Time Remaining: {seconds} seconds")
+
+    seconds -= 1
+
+    time.sleep(1)
+
+    if seconds < 0:
+
+        st.write("Time's up!")
+
+        question 
+
+ 
